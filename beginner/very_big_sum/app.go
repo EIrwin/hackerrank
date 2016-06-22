@@ -5,6 +5,7 @@ import (
 	"log"
 	"bufio"
 	"os"
+	"strings"
 	"strconv"
 )
 
@@ -20,19 +21,22 @@ func main()  {
 	}
 
 	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Split(bufio.ScanWords)
-
-	var sum uint64
 	for scanner.Scan() {
-		valStr := scanner.Text()
-		val,err := strconv.ParseUint(valStr,10,64)
-		if err != nil {
-			fmt.Println("error")
-			log.Fatalln(err)
-		}
-		fmt.Println(val)
-		sum += val
+		inputStr := scanner.Text()
+		input := strings.Split(inputStr," ")
+		sum,_ := sum(input)
+		fmt.Println(sum)
 	}
-	fmt.Println(sum)
+}
 
+func sum(input []string) (uint64,error)  {
+	var sum uint64
+	for _,value  := range input {
+		val,err := strconv.ParseUint(value,10,64)
+		sum += val
+		if err != nil {
+			log.Println(err)
+		}
+	}
+	return sum,nil
 }
