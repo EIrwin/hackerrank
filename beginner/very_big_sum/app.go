@@ -1,4 +1,4 @@
-package very_big_sum
+package main
 
 import (
 	"fmt"
@@ -27,8 +27,10 @@ func main()  {
 		valStr := scanner.Text()
 		val,err := strconv.ParseUint(valStr,10,64)
 		if err != nil {
+			fmt.Println("error")
 			log.Fatalln(err)
 		}
+		fmt.Println(val)
 		sum += val
 	}
 	fmt.Println(sum)
